@@ -1,0 +1,36 @@
+body {
+    background-color: #22f422;
+}
+
+h1 { 
+    text-align: center;
+    color: black;
+    letter-spacing: 3px;
+    font-family: "Lucida Console", Monaco, monospace;
+}
+
+footer {
+    text-align: center;
+    margin: 0px 0px 0px 0px;
+}
+
+#grid {
+    display: grid;
+    height: 500px;
+    width: 500px;
+    margin: 0 auto;
+    /*position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #2196F3;   */
+}
+
+#toy {
+    background-color: red;
+    border-radius: 20px;
+    padding: 50px;;
+}
+
+* { /* This makes sure that the padding and border are included in the total width and height of the elements. */
+    box-sizing: border-box;
+  }
