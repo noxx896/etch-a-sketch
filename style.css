@@ -16,8 +16,8 @@ footer {
 
 #grid {
     display: grid;
-    height: 500px;
-    width: 500px;
+    height: 30rem;
+    width: 30rem;
     margin: 0 auto;
     /*position: relative;
     margin-left: auto;
@@ -26,9 +26,13 @@ footer {
 }
 
 #toy {
+    display: block;
+    margin: auto;
     background-color: red;
+    height: 45rem;
+    width: 40rem;
     border-radius: 20px;
-    padding: 50px;;
+    padding-top: 4rem;
 }
 
 * { /* This makes sure that the padding and border are included in the total width and height of the elements. */
