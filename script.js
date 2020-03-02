@@ -7,11 +7,23 @@ let buttonDiv = document.getElementById("buttons");
 let colorDiv = document.getElementById("colorDiv");
 buttonDiv.appendChild(colorDiv);
 
+let selection = "";
+
 const black = document.createElement("button");
+black.addEventListener('click', () => selection = "black");
+
 const green = document.createElement("button");
+green.addEventListener('click', () => selection = "green");
+
 const blue = document.createElement("button");
+blue.addEventListener('click', () => selection = "blue");
+
 const yellow = document.createElement("button");
+yellow.addEventListener('click', () => selection = "yellow");
+
 const rainbow = document.createElement("button");
+rainbow.addEventListener('click', () => selection = "rainbow");
+
 colorDiv.appendChild(black);
 colorDiv.appendChild(green);
 colorDiv.appendChild(blue);
@@ -19,6 +31,8 @@ colorDiv.appendChild(yellow);
 colorDiv.appendChild(rainbow);
 
 const clear = document.createElement("button");
+clear.addEventListener('click', clearGrid);
+
 buttonDiv.appendChild(clear);
 
 toy.appendChild(grid);
@@ -30,14 +44,37 @@ toy.appendChild(buttonDiv);
 //----- GRID ------------------>
 function createGrid() {
     resetGrid();
-    grid.style.gridTemplateColumns = `repeat(${10}, 1fr)`;
-    grid.style.gridTemplateRows = `repeat(${10}, 1fr)`;
+    let gridSize = prompt("Enter grid size");
+    grid.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`; //repeat gridSize-times with 1fr of the total grid size
+    grid.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
 
-    for(i = 0; i < 100; i++) { 
+    for(i = 0; i < gridSize*gridSize; i++) { 
         let div = document.createElement("div");
         div.style.backgroundColor = "white";
-        div.style.border = "1px #FFFFFF";
+        div.style.border = "1px #000000";
         grid.appendChild(div);
+        div.addEventListener("mouseover", function() {
+            switch(selection) {
+                case "black":
+                    div.style.backgroundColor = "#000000";
+                    break;
+                
+                case "green":
+                    div.style.backgroundColor = "#23f203";
+                    break;
+
+                case "blue":
+                    div.style.backgroundColor = "#035bf2";
+                    break;
+
+                case "yellow":
+                    div.style.backgroundColor = "#d8f203";
+                    break;
+
+                case "rainbow":
+                    div.style.backgroundColor = rainbowColor();
+            }
+        })
 
     }
 }
@@ -48,6 +85,14 @@ function resetGrid() {
     }
     grid.style.gridTemplateColumns = '';
     grid.style.gridTemplateRows  = '';
+}
+
+function clearGrid() {
+    for (let i = 0; i < grid.childElementCount; i++) {
+        if (grid.childNodes[i].style.backgroundColor !== 'hsl(0, 0%, 100%)') {
+            grid.childNodes[i].style.backgroundColor = 'hsl(0, 0%, 100%)';
+        }
+    }
 }
 
 //------------------------------>
@@ -96,7 +141,7 @@ yellow.style.cursor = "pointer";
 yellow.style.margin = "0 10px";
 
 rainbow.textContent = "RAINBOW";
-rainbow.style.backgroundColor = "red";
+rainbow.style.backgroundImage = "linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet)";
 rainbow.style.color = "white";
 rainbow.style.borderRadius = "50px";
 rainbow.style.fontSize = "1rem";
@@ -112,6 +157,15 @@ clear.style.fontSize = "1rem";
 clear.style.borderRadius = "60%";
 clear.style.cursor = "pointer";
 clear.style.margin = "auto";
+
+function rainbowColor() {
+    let letters = "0123456789ABCDEF";
+    let color = "#";
+    for(i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random()*16)];
+    }
+    return color;
+}
 
 //------------------------------>
 
